@@ -1,10 +1,3 @@
-/*#!/usr/bin/env groovy
-
-// Configure using microservice-pipelines and using "part2" branch
-@Library("microservice-pipelines@part2") _
-
-// Entry point into microservice-pipelines
-jenkinsJob.call()*/
 
 pipeline{
     agent any
@@ -14,13 +7,7 @@ pipeline{
     stages{
         stage('Checkout'){
             steps{
-                withCredentials([string(credentialsId: 'Sansu-git', variable: 'git')]) {
-                echo "My password is '${git}'!"
-                checkout([$class: 'GitSCM',
-                branches: [[name: 'origin/dev']],
-                extensions: [[$class: 'WipeWorkspace']],
-                userRemoteConfigs: [[url: "${git}"]]
-                ])
+               checkout scm
                 }
             }
         }
@@ -34,7 +21,7 @@ pipeline{
    
       
         
-       stage('Sonar') 
+      /* stage('Sonar') 
        {environment {
            scannerHome=tool 'sonar scanner'
        }
@@ -52,7 +39,7 @@ sh label: '', script: 'curl -u $usr:$pass --upload-file target/sam-app1.war http
 }
             
         }
-        }
+        }*/
         
        
  stage ('Deploy'){
@@ -69,3 +56,11 @@ sh label: '', script: 'curl -u $usr:$pass --upload-file target/sam-app1.war http
     }
 }
 }
+
+#!/usr/bin/env groovy
+
+// Configure using microservice-pipelines and using "part2" branch
+@Library("microservice-pipelines@part2") _
+
+// Entry point into microservice-pipelines
+jenkinsJob.call()
