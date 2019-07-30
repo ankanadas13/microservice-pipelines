@@ -11,11 +11,11 @@ def call(){
             buildAndTest()
         }*/
         
-        stage("Package artifact") {
-        sh "mvn package"
+        stage('Package artifact') {
+        sh 'mvn package'
     }
-         stage("Backend tests"){
-        sh "mvn test"
+         stage('Backend tests'){
+        sh 'mvn test'
     }
     }
 }
