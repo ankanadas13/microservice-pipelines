@@ -4,16 +4,23 @@ def call(){
             checkout scm
         }
 
-        // Execute different stages depending on the job
+        /*Execute different stages depending on the job
         if(env.JOB_NAME.contains("deploy")){
             packageArtifact()
         } else if(env.JOB_NAME.contains("test")) {
             buildAndTest()
-        }
+        }*/
+        
+        stage("Package artifact") {
+        sh "mvn package"
+    }
+         stage("Backend tests"){
+        sh "mvn test"
+    }
     }
 }
 
-def packageArtifact(){
+/*def packageArtifact(){
     stage("Package artifact") {
         sh "mvn package"
     }
@@ -23,4 +30,4 @@ def buildAndTest(){
     stage("Backend tests"){
         sh "mvn test"
     }
-}
+}*/
